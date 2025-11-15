@@ -1,13 +1,13 @@
 {
-    "1.0.32": {
+    "1.0.35": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/apps/apps/trains/community/komodo/1.0.32",
-        "last_update": "2025-09-29 12:33:29",
+        "location": "/__w/apps/apps/trains/community/komodo/1.0.35",
+        "last_update": "2025-11-14 15:36:45",
         "required_features": [],
-        "human_version": "1.19.5_1.0.32",
-        "version": "1.0.32",
+        "human_version": "1.19.5_1.0.35",
+        "version": "1.0.35",
         "app_metadata": {
             "app_version": "1.19.5",
             "capabilities": [],
@@ -28,8 +28,8 @@
             "keywords": [
                 "deployment"
             ],
-            "lib_version": "2.1.53",
-            "lib_version_hash": "87d1db998a9aab3355a78a686d640251822e640125e65ad1237c9902a59e32f1",
+            "lib_version": "2.1.60",
+            "lib_version_hash": "696caec82f6a681efde24281372d97cc0d1466140c306165a890d5cd039c2013",
             "maintainers": [
                 {
                     "email": "dev@truenas.com",
@@ -54,10 +54,10 @@
                     "user_name": "root"
                 },
                 {
-                    "description": "MongoDB runs as non-root user.",
-                    "gid": 999,
+                    "description": "MongoDB runs as any non-root user.",
+                    "gid": 568,
                     "group_name": "mongodb",
-                    "uid": 999,
+                    "uid": 568,
                     "user_name": "mongodb"
                 }
             ],
@@ -75,7 +75,7 @@
             ],
             "title": "Komodo",
             "train": "community",
-            "version": "1.0.32"
+            "version": "1.0.35"
         },
         "schema": {
             "groups": [
@@ -799,7 +799,7 @@
                                                             "type": "string",
                                                             "required": true,
                                                             "hidden": true,
-                                                            "default": "pg_data"
+                                                            "default": "mongodb_data"
                                                         }
                                                     },
                                                     {
@@ -1310,8 +1310,8 @@
             "keywords": [
                 "deployment"
             ],
-            "lib_version": "2.1.53",
-            "lib_version_hash": "87d1db998a9aab3355a78a686d640251822e640125e65ad1237c9902a59e32f1",
+            "lib_version": "2.1.60",
+            "lib_version_hash": "696caec82f6a681efde24281372d97cc0d1466140c306165a890d5cd039c2013",
             "maintainers": [
                 {
                     "email": "dev@truenas.com",
@@ -1336,10 +1336,10 @@
                     "user_name": "root"
                 },
                 {
-                    "description": "MongoDB runs as non-root user.",
-                    "gid": 999,
+                    "description": "MongoDB runs as any non-root user.",
+                    "gid": 568,
                     "group_name": "mongodb",
-                    "uid": 999,
+                    "uid": 568,
                     "user_name": "mongodb"
                 }
             ],
@@ -1357,7 +1357,7 @@
             ],
             "title": "Komodo",
             "train": "community",
-            "version": "1.0.32"
+            "version": "1.0.35"
         }
     }
 }
