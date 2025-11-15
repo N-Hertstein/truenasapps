@@ -45,7 +45,7 @@ module.exports = {
         executionMode: "update",
         commands: [
           // https://docs.renovatebot.com/templates/#other-available-fields
-          "./.github/scripts/renovate_bump.sh {{{packageFileDir}}} patch {{{depName}}} {{{newVersion}}}",
+          "./.github/scripts/renovate_bump.sh {{{packageFileDir}}} patch {{{depName}}} {{{newValue}}} {{{branchName}}}",
         ],
       },
     },
@@ -137,11 +137,6 @@ module.exports = {
       ["jenkins/jenkins"]
     ),
     customVersioning(
-      // 1d42f9ac3-v1.68.2-go1.18.8
-      "^[a-z0-9]{9}-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-go\\d+\\.\\d+\\.\\d+$",
-      ["storjlabs/storagenode"]
-    ),
-    customVersioning(
       // 1.2.3.4, but not 1.2.0.4 (3rd digit 0 equals beta)
       "^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>[1-9]\\d*)\\.(?<build>\\d+)$",
       ["emby/embyserver"]
@@ -162,17 +157,12 @@ module.exports = {
       ["apache/tika"]
     ),
     customVersioning(
-      // 2.0.0-beta.1
-      "^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-beta\\.(?<build>\\d+)$",
-      ["ghcr.io/louislam/uptime-kuma"]
-    ),
-    customVersioning(
       // postgresql-v2.15.1
       "^postgresql-v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
       ["ghcr.io/umami-software/umami"]
     ),
     customVersioning(
-      // 20250122_091948  {year}{month}{day}_{build}
+      // 20250122_091948 {year}{month}{day}_{build}
       "^(?<major>\\d{4})(?<minor>\\d{2})(?<patch>\\d{2})_(?<build>\\d+)$",
       ["ghcr.io/nextcloud-releases/aio-imaginary"]
     ),
@@ -197,14 +187,14 @@ module.exports = {
       ["lmscommunity/lyrionmusicserver"]
     ),
     customVersioning(
-      // 2.1.0.3-beta
+      // 2.1.0.3-stable
       "^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)-stable$",
       ["duplicati/duplicati"]
     ),
     customVersioning(
       // 18.0-20250218
       "^(?<major>\\d+)\\.(?<minor>\\d+)-(?<patch>\\d+)$",
-      ["odoo/odoo"]
+      ["odoo"]
     ),
     customVersioning(
       // 1.0.0-hash
@@ -306,6 +296,21 @@ module.exports = {
       "^apache-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
       ["kimai/kimai2"]
     ),
+    customVersioning(
+      // 4.0.0-beta.434
+      "^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-beta\\.(?<build>\\d+)$",
+      ["ghcr.io/coollabsio/coolify"]
+    ),
+    customVersioning(
+      // some-app-1.0.2
+      "^.+-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+      ["opencloudeu/web-extensions"]
+    ),
+    customVersioning(
+      // appname-1.2.3
+      `^(?<compatibility>draw-io|progress-bars|json-viewer|external-sites|unzip|cast|importer|arcade|maps)-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$`,
+      [`opencloudeu/web-extensions`]
+    )
   ],
 };
 

@@ -1,18 +1,18 @@
 {
-    "1.3.14": {
+    "1.3.19": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/apps/apps/trains/stable/storj/1.3.14",
-        "last_update": "2025-09-29 12:24:45",
+        "location": "/__w/apps/apps/trains/stable/storj/1.3.19",
+        "last_update": "2025-11-14 15:36:45",
         "required_features": [],
-        "human_version": "6f87ea801-v1.71.2-go1.18.8_1.3.14",
-        "version": "1.3.14",
+        "human_version": "latest_1.3.19",
+        "version": "1.3.19",
         "app_metadata": {
             "annotations": {
                 "min_scale_version": "24.10.2.2"
             },
-            "app_version": "6f87ea801-v1.71.2-go1.18.8",
+            "app_version": "latest",
             "capabilities": [],
             "categories": [
                 "storage"
@@ -29,8 +29,8 @@
                 "financial",
                 "file-sharing"
             ],
-            "lib_version": "2.1.54",
-            "lib_version_hash": "84f6b0a92f465357aaea5f1a4742bbcd12cf998cae4614170a0a2503f65809ab",
+            "lib_version": "2.1.57",
+            "lib_version_hash": "6659ad369fff2f1df318cb6353bb32bffe7047dc21df4823750d39be7284e605",
             "maintainers": [
                 {
                     "email": "dev@truenas.com",
@@ -56,7 +56,7 @@
             ],
             "title": "Storj",
             "train": "stable",
-            "version": "1.3.14"
+            "version": "1.3.19"
         },
         "schema": {
             "groups": [
@@ -255,13 +255,6 @@
                                 "label": "WebUI Port",
                                 "schema": {
                                     "type": "dict",
-                                    "show_if": [
-                                        [
-                                            "host_network",
-                                            "=",
-                                            false
-                                        ]
-                                    ],
                                     "attrs": [
                                         {
                                             "variable": "bind_mode",
@@ -291,14 +284,7 @@
                                             "label": "Port Number",
                                             "schema": {
                                                 "type": "int",
-                                                "show_if": [
-                                                    [
-                                                        "bind_mode",
-                                                        "=",
-                                                        "published"
-                                                    ]
-                                                ],
-                                                "default": 20909,
+                                                "default": 14002,
                                                 "min": 1,
                                                 "max": 65535,
                                                 "required": true
@@ -1137,7 +1123,7 @@
             "annotations": {
                 "min_scale_version": "24.10.2.2"
             },
-            "app_version": "6f87ea801-v1.71.2-go1.18.8",
+            "app_version": "latest",
             "capabilities": [],
             "categories": [
                 "storage"
@@ -1154,8 +1140,8 @@
                 "financial",
                 "file-sharing"
             ],
-            "lib_version": "2.1.54",
-            "lib_version_hash": "84f6b0a92f465357aaea5f1a4742bbcd12cf998cae4614170a0a2503f65809ab",
+            "lib_version": "2.1.57",
+            "lib_version_hash": "6659ad369fff2f1df318cb6353bb32bffe7047dc21df4823750d39be7284e605",
             "maintainers": [
                 {
                     "email": "dev@truenas.com",
@@ -1181,7 +1167,7 @@
             ],
             "title": "Storj",
             "train": "stable",
-            "version": "1.3.14"
+            "version": "1.3.19"
         }
     }
 }

@@ -1,15 +1,15 @@
 {
-    "1.0.9": {
+    "1.0.18": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/apps/apps/trains/community/opencloud/1.0.9",
-        "last_update": "2025-09-29 12:24:45",
+        "location": "/__w/apps/apps/trains/community/opencloud/1.0.18",
+        "last_update": "2025-11-14 15:40:10",
         "required_features": [],
-        "human_version": "3.5.0_1.0.9",
-        "version": "1.0.9",
+        "human_version": "3.7.0_1.0.18",
+        "version": "1.0.18",
         "app_metadata": {
-            "app_version": "3.5.0",
+            "app_version": "3.7.0",
             "capabilities": [],
             "categories": [
                 "storage"
@@ -24,8 +24,8 @@
                 "file sharing",
                 "collaboration"
             ],
-            "lib_version": "2.1.54",
-            "lib_version_hash": "84f6b0a92f465357aaea5f1a4742bbcd12cf998cae4614170a0a2503f65809ab",
+            "lib_version": "2.1.61",
+            "lib_version_hash": "de8d91053f62a1b7a782bcf3f96d38851349a7725c457abb090beab46ac0e1ea",
             "maintainers": [
                 {
                     "email": "dev@truenas.com",
@@ -41,6 +41,13 @@
                     "group_name": "opencloud",
                     "uid": 568,
                     "user_name": "opencloud"
+                },
+                {
+                    "description": "Tika runs as a non-root user.",
+                    "gid": 568,
+                    "group_name": "tika",
+                    "uid": 568,
+                    "user_name": "tika"
                 }
             ],
             "screenshots": [],
@@ -51,7 +58,7 @@
             ],
             "title": "OpenCloud",
             "train": "community",
-            "version": "1.0.9"
+            "version": "1.0.18"
         },
         "schema": {
             "groups": [
@@ -112,12 +119,155 @@
                                 }
                             },
                             {
-                                "variable": "insecure_access",
+                                "variable": "insecure",
                                 "label": "Insecure Access",
-                                "description": "Enabled: Allow access via self-signed SSL certificates.</br>\nDisabled: Require a valid SSL certificate.\n",
+                                "description": "Enabled: Allow access via self-signed SSL certificates.</br>\nDisabled: Require a valid SSL certificate.</br>\nNote: Even with insecure access enabled, WOPI might still require valid\nSSL certificates depending on the collaboration application used\nand its configuration.\n",
                                 "schema": {
                                     "type": "boolean",
                                     "default": true
+                                }
+                            },
+                            {
+                                "variable": "proof_disable",
+                                "label": "Proof Key Disable",
+                                "description": "Disable proof key validation for Collaboration.",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": true
+                                }
+                            },
+                            {
+                                "variable": "jwt_secret",
+                                "label": "JWT Secret",
+                                "description": "The JWT secret for Collaboration.</br>\nIt must match the secret configured in the OnlyOffice server.\n",
+                                "schema": {
+                                    "type": "string",
+                                    "show_if": [
+                                        [
+                                            "enabled",
+                                            "=",
+                                            true
+                                        ],
+                                        [
+                                            "type",
+                                            "=",
+                                            "onlyoffice"
+                                        ]
+                                    ],
+                                    "default": "",
+                                    "private": true
+                                }
+                            },
+                            {
+                                "variable": "full_text_search",
+                                "label": "Full Text Search",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "enabled",
+                                            "label": "Enabled",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": true
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "collaboration",
+                                "label": "Collaboration",
+                                "schema": {
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "enabled",
+                                            "label": "Enabled",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "default": false
+                                            }
+                                        },
+                                        {
+                                            "variable": "type",
+                                            "label": "Type",
+                                            "schema": {
+                                                "type": "string",
+                                                "default": "collabora",
+                                                "required": true,
+                                                "show_if": [
+                                                    [
+                                                        "enabled",
+                                                        "=",
+                                                        true
+                                                    ]
+                                                ],
+                                                "enum": [
+                                                    {
+                                                        "value": "collabora",
+                                                        "description": "Collabora Online"
+                                                    },
+                                                    {
+                                                        "value": "onlyoffice",
+                                                        "description": "OnlyOffice"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "url",
+                                            "label": "URL",
+                                            "description": "The URL of the collaboration application. (e.g. https://collabora.example.com)",
+                                            "schema": {
+                                                "type": "uri",
+                                                "default": "",
+                                                "show_if": [
+                                                    [
+                                                        "enabled",
+                                                        "=",
+                                                        true
+                                                    ]
+                                                ],
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "insecure",
+                                            "label": "Insecure",
+                                            "description": "Allow insecure connections to the collaboration application.",
+                                            "schema": {
+                                                "type": "boolean",
+                                                "show_if": [
+                                                    [
+                                                        "enabled",
+                                                        "=",
+                                                        true
+                                                    ]
+                                                ],
+                                                "default": false
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "variable": "extra_services",
+                                "label": "Extra Services",
+                                "description": "A list of additional services to start in the same OpenCloud process.</br>\nFor example `collaboration`. Additional config may be required depending on the service.\n",
+                                "schema": {
+                                    "type": "list",
+                                    "items": [
+                                        {
+                                            "variable": "service",
+                                            "label": "Service",
+                                            "schema": {
+                                                "type": "string",
+                                                "default": "",
+                                                "required": true
+                                            }
+                                        }
+                                    ]
                                 }
                             },
                             {
@@ -354,6 +504,122 @@
                                 }
                             },
                             {
+                                "variable": "additional_csp",
+                                "label": "Additional Content Security Policy",
+                                "description": "Additional Content Security Policy directives to add to the default CSP.</br>\nThese will be merged with the default CSP directives.</br>\nOnly add here directives/items that are not already present in the CSP File (/etc/opencloud/csp.yaml).</br>\nIf you notice a directive/item is missing that affects the core functionality of OpenCloud, </br>\nor any of the integrations configured via this UI, please open an issue on GitHub.</br>\nCSP keywords should be enclosed in single quotes.</br>\nExample: `'unsafe-eval'`\n",
+                                "schema": {
+                                    "type": "list",
+                                    "default": [
+                                        {
+                                            "directive": "connect-src",
+                                            "items": [
+                                                "https://raw.githubusercontent.com/opencloud-eu/awesome-apps/",
+                                                "https://update.opencloud.eu/"
+                                            ]
+                                        },
+                                        {
+                                            "directive": "frame-src",
+                                            "items": [
+                                                "https://embed.diagrams.net/"
+                                            ]
+                                        },
+                                        {
+                                            "directive": "img-src",
+                                            "items": [
+                                                "https://raw.githubusercontent.com/opencloud-eu/awesome-apps/",
+                                                "https://tile.openstreetmap.org/"
+                                            ]
+                                        }
+                                    ],
+                                    "items": [
+                                        {
+                                            "variable": "csp_entry",
+                                            "label": "Content Security Policy Entry",
+                                            "schema": {
+                                                "type": "dict",
+                                                "attrs": [
+                                                    {
+                                                        "variable": "directive",
+                                                        "label": "Directive",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "enum": [
+                                                                {
+                                                                    "value": "child-src",
+                                                                    "description": "child-src"
+                                                                },
+                                                                {
+                                                                    "value": "connect-src",
+                                                                    "description": "connect-src"
+                                                                },
+                                                                {
+                                                                    "value": "default-src",
+                                                                    "description": "default-src"
+                                                                },
+                                                                {
+                                                                    "value": "font-src",
+                                                                    "description": "font-src"
+                                                                },
+                                                                {
+                                                                    "value": "frame-ancestors",
+                                                                    "description": "frame-ancestors"
+                                                                },
+                                                                {
+                                                                    "value": "frame-src",
+                                                                    "description": "frame-src"
+                                                                },
+                                                                {
+                                                                    "value": "img-src",
+                                                                    "description": "img-src"
+                                                                },
+                                                                {
+                                                                    "value": "manifest-src",
+                                                                    "description": "manifest-src"
+                                                                },
+                                                                {
+                                                                    "value": "media-src",
+                                                                    "description": "media-src"
+                                                                },
+                                                                {
+                                                                    "value": "object-src",
+                                                                    "description": "object-src"
+                                                                },
+                                                                {
+                                                                    "value": "script-src",
+                                                                    "description": "script-src"
+                                                                },
+                                                                {
+                                                                    "value": "style-src",
+                                                                    "description": "style-src"
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "variable": "items",
+                                                        "label": "Items",
+                                                        "schema": {
+                                                            "type": "list",
+                                                            "items": [
+                                                                {
+                                                                    "variable": "item",
+                                                                    "label": "Item",
+                                                                    "schema": {
+                                                                        "type": "string",
+                                                                        "required": true
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
                                 "variable": "additional_envs",
                                 "label": "Additional Environment Variables",
                                 "schema": {
@@ -502,12 +768,75 @@
                                 }
                             },
                             {
-                                "variable": "host_network",
-                                "label": "Host Network",
-                                "description": "Bind to the host network. It's recommended to keep this disabled.\n",
+                                "variable": "metrics_port",
+                                "label": "Metrics Port",
                                 "schema": {
-                                    "type": "boolean",
-                                    "default": false
+                                    "type": "dict",
+                                    "attrs": [
+                                        {
+                                            "variable": "bind_mode",
+                                            "label": "Port Bind Mode",
+                                            "description": "The port bind mode.</br>\n- Publish: The port will be published on the host for external access.</br>\n- Expose: The port will be exposed for inter-container communication.</br>\n- None: The port will not be exposed or published.</br>\nNote: If the Dockerfile defines an EXPOSE directive,\nthe port will still be exposed for inter-container communication regardless of this setting.\n",
+                                            "schema": {
+                                                "type": "string",
+                                                "default": "",
+                                                "enum": [
+                                                    {
+                                                        "value": "published",
+                                                        "description": "Publish port on the host for external access"
+                                                    },
+                                                    {
+                                                        "value": "exposed",
+                                                        "description": "Expose port for inter-container communication"
+                                                    },
+                                                    {
+                                                        "value": "",
+                                                        "description": "None"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "variable": "port_number",
+                                            "label": "Port Number",
+                                            "schema": {
+                                                "type": "int",
+                                                "default": 30268,
+                                                "min": 1,
+                                                "max": 65535,
+                                                "required": true
+                                            }
+                                        },
+                                        {
+                                            "variable": "host_ips",
+                                            "label": "Host IPs",
+                                            "description": "IPs on the host to bind this port",
+                                            "schema": {
+                                                "type": "list",
+                                                "show_if": [
+                                                    [
+                                                        "bind_mode",
+                                                        "=",
+                                                        "published"
+                                                    ]
+                                                ],
+                                                "default": [],
+                                                "items": [
+                                                    {
+                                                        "variable": "host_ip",
+                                                        "label": "Host IP",
+                                                        "schema": {
+                                                            "type": "string",
+                                                            "required": true,
+                                                            "$ref": [
+                                                                "definitions/node_bind_ip"
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         ]
@@ -1134,6 +1463,10 @@
                                                                 {
                                                                     "value": "opencloud",
                                                                     "description": "opencloud"
+                                                                },
+                                                                {
+                                                                    "value": "tika",
+                                                                    "description": "tika"
                                                                 }
                                                             ]
                                                         }
@@ -1191,7 +1524,7 @@
         "readme": "<h1>OpenCloud</h1> <p><a href=\"https://opencloud.eu\">OpenCloud</a> is an excellent file management and collaboration for public authorities, providers and business - or anyone who values ease of use and digital sovereignty.</p>",
         "changelog": null,
         "chart_metadata": {
-            "app_version": "3.5.0",
+            "app_version": "3.7.0",
             "capabilities": [],
             "categories": [
                 "storage"
@@ -1206,8 +1539,8 @@
                 "file sharing",
                 "collaboration"
             ],
-            "lib_version": "2.1.54",
-            "lib_version_hash": "84f6b0a92f465357aaea5f1a4742bbcd12cf998cae4614170a0a2503f65809ab",
+            "lib_version": "2.1.61",
+            "lib_version_hash": "de8d91053f62a1b7a782bcf3f96d38851349a7725c457abb090beab46ac0e1ea",
             "maintainers": [
                 {
                     "email": "dev@truenas.com",
@@ -1223,6 +1556,13 @@
                     "group_name": "opencloud",
                     "uid": 568,
                     "user_name": "opencloud"
+                },
+                {
+                    "description": "Tika runs as a non-root user.",
+                    "gid": 568,
+                    "group_name": "tika",
+                    "uid": 568,
+                    "user_name": "tika"
                 }
             ],
             "screenshots": [],
@@ -1233,7 +1573,7 @@
             ],
             "title": "OpenCloud",
             "train": "community",
-            "version": "1.0.9"
+            "version": "1.0.18"
         }
     }
 }

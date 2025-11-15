@@ -1,15 +1,15 @@
 {
-    "1.0.7": {
+    "1.0.10": {
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/apps/apps/trains/community/kiwix-server/1.0.7",
-        "last_update": "2025-09-25 19:39:11",
+        "location": "/__w/apps/apps/trains/community/kiwix-server/1.0.10",
+        "last_update": "2025-11-14 15:36:45",
         "required_features": [],
-        "human_version": "3.7.0_1.0.7",
-        "version": "1.0.7",
+        "human_version": "3.8.0_1.0.10",
+        "version": "1.0.10",
         "app_metadata": {
-            "app_version": "3.7.0",
+            "app_version": "3.8.0",
             "capabilities": [],
             "categories": [
                 "media"
@@ -26,8 +26,8 @@
                 "zim",
                 "wiki"
             ],
-            "lib_version": "2.1.53",
-            "lib_version_hash": "87d1db998a9aab3355a78a686d640251822e640125e65ad1237c9902a59e32f1",
+            "lib_version": "2.1.57",
+            "lib_version_hash": "6659ad369fff2f1df318cb6353bb32bffe7047dc21df4823750d39be7284e605",
             "maintainers": [
                 {
                     "email": "dev@truenas.com",
@@ -51,7 +51,7 @@
             ],
             "title": "Kiwix Server",
             "train": "community",
-            "version": "1.0.7"
+            "version": "1.0.10"
         },
         "schema": {
             "groups": [
@@ -104,7 +104,7 @@
                             {
                                 "variable": "load_specific_zim_files",
                                 "label": "Load specific ZIM Files",
-                                "description": "Leave this empty to load all ZIM files in the Data directory.</br>\nOnly specify the file name, not the path.\n",
+                                "description": "Leave this empty to load all ZIM files in the Data directory.</br>\nIf there are no ZIM files in the Data directory or the specified file is missing, it will fail to start.</br>\nOnly specify the file name, not the path.\n",
                                 "schema": {
                                     "type": "list",
                                     "default": [],
@@ -815,7 +815,7 @@
         "readme": "<h1>Kiwix Server</h1> <p><a href=\"https://github.com/kiwix/kiwix-tools\">Kiwix Server</a> is a ZIM compatible Web server.</p>",
         "changelog": null,
         "chart_metadata": {
-            "app_version": "3.7.0",
+            "app_version": "3.8.0",
             "capabilities": [],
             "categories": [
                 "media"
@@ -832,8 +832,8 @@
                 "zim",
                 "wiki"
             ],
-            "lib_version": "2.1.53",
-            "lib_version_hash": "87d1db998a9aab3355a78a686d640251822e640125e65ad1237c9902a59e32f1",
+            "lib_version": "2.1.57",
+            "lib_version_hash": "6659ad369fff2f1df318cb6353bb32bffe7047dc21df4823750d39be7284e605",
             "maintainers": [
                 {
                     "email": "dev@truenas.com",
@@ -857,7 +857,7 @@
             ],
             "title": "Kiwix Server",
             "train": "community",
-            "version": "1.0.7"
+            "version": "1.0.10"
         }
     }
 }
