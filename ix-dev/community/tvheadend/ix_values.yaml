@@ -1,7 +1,7 @@
 images:
   image:
     repository: ghcr.io/linuxserver/tvheadend
-    tag: 00abbbb0-ls266
+    tag: eb023c57-ls277
 
 consts:
   tvheadend_container_name: tvheadend
