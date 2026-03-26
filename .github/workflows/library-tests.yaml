@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Install dependencies
         run: |
@@ -21,6 +21,7 @@ jobs:
           apt install -y \
             python3-yaml \
             python3-bcrypt \
+            python3-docker \
             python3-pytest \
             python3-pytest-mock
 
